@@ -1,0 +1,280 @@
+﻿@using doAn.Models
+@model doAn.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Index";
+    List<TaiKhoan> list = ViewData["NV"] as List<TaiKhoan>;
+
+}
+<style>
+    .Choicefile {
+        display: block;
+        background: #14142B;
+        border: 1px solid #fff;
+        color: #fff;
+        width: 150px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 5px 0px;
+        border-radius: 5px;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .Choicefile:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+    #uploadfile,
+    .removeimg {
+        display: none;
+    }
+
+    #thumbbox {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .removeimg {
+        height: 25px;
+        position: absolute;
+        background-repeat: no-repeat;
+        top: 5px;
+        left: 5px;
+        background-size: 25px;
+        width: 25px;
+        /* border: 3px solid red; */
+        border-radius: 50%;
+    }
+
+        .removeimg::before {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            content: '';
+            border: 1px solid red;
+            background: red;
+            text-align: center;
+            display: block;
+            margin-top: 11px;
+            transform: rotate(45deg);
+        }
+
+        .removeimg::after {
+            /* color: #FFF; */
+            /* background-color: #DC403B; */
+            content: '';
+            background: red;
+            border: 1px solid red;
+            text-align: center;
+            display: block;
+            transform: rotate(-45deg);
+            margin-top: -2px;
+        }
+</style>
+<script>
+    const inpFile = document.getElementById("inpFile");
+    const loadFile = document.getElementById("loadFile");
+    const previewContainer = document.getElementById("imagePreview");
+    const previewContainer = document.getElementById("imagePreview");
+    const previewImage = previewContainer.querySelector(".image-preview__image");
+    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+    inpFile.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            previewDefaultText.style.display = "none";
+            previewImage.style.display = "block";
+            reader.addEventListener("load", function () {
+                previewImage.setAttribute("src", this.result);
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+
+</script>
+<script>
+
+    function readURL(input, thumbimage) {
+        if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#thumbimage").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else { // Sử dụng cho IE
+            $("#thumbimage").attr('src', input.value);
+
+        }
+        $("#thumbimage").show();
+        $('.filename').text($("#uploadfile").val());
+        $('.Choicefile').css('background', '#14142B');
+        $('.Choicefile').css('cursor', 'default');
+        $(".removeimg").show();
+        $(".Choicefile").unbind('click');
+
+    }
+    $(document).ready(function () {
+        $(".Choicefile").bind('click', function () {
+            $("#uploadfile").click();
+
+        });
+        $(".removeimg").click(function () {
+            $("#thumbimage").attr('src', '').hide();
+            $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+            $(".removeimg").hide();
+            $(".Choicefile").bind('click', function () {
+                $("#uploadfile").click();
+            });
+            $('.Choicefile').css('background', '#14142B');
+            $('.Choicefile').css('cursor', 'pointer');
+            $(".filename").text("");
+        });
+    })
+</script>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách nhân viên</li>
+            <li class="breadcrumb-item"><a href="#">Thêm nhân viên</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Index", "ThemNhanVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="tile">
+                <h3 class="tile-title">Tạo mới nhân viên</h3>
+                <div class="tile-body">
+                    <div class="row element-button">
+
+
+                    </div>
+
+                    <form class="row">
+                        <div class="form-group  col-md-3">
+                            <label class="control-label">ID nhân viên</label>
+
+                            @Html.TextBoxFor(m => m.taiKhoan1, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Mật Khẩu</label>
+
+                            @Html.TextBoxFor(m => m.matKhau, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Họ và tên </label>
+
+                            @Html.TextBoxFor(m => m.hoVaTen, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Địa chỉ thường trú</label>
+
+                            @Html.TextBoxFor(m => m.diaChi, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Số điện thoại</label>
+
+                            @Html.TextBoxFor(m => m.soDT, new { @class = "form-control" })
+                        </div>
+
+
+                        <div class="form-group  col-md-3">
+                            <label class="control-label">Ngày Sinh</label>
+
+                            @Html.TextBoxFor(m => m.ngaysinh, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Giới tính </label>
+
+                            @Html.TextBoxFor(m => m.gioiTinh, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Chức vụ </label>
+
+                            @Html.TextBoxFor(m => m.chucVu, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Ghi chú</label>
+
+                            @Html.TextBoxFor(m => m.ghiChu, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Trạng thái</label>
+
+                            @Html.TextBoxFor(m => m.trangThai, new { @class = "form-control" })
+                        </div>
+                      
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Ảnh sản phẩm</label>
+                                <div class="card-body">
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">File input </label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="uploadfile" name="HinhDaiDien" />
+                                                    <label class="custom-file-label" for="upFile">chosse File</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <button class="input-group-text" disabled>Tải lên</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding:4px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                <button class="btn btn-success" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+            </div>
+
+
+            }
+        </div>
+    </div>
+</main>
+
+
+<!--
+  MODAL
+-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group  col-md-12">
+                        <span class="thong-tin-thanh-toan">
+                            <h5>Tạo chức vụ mới</h5>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Nhập tên chức vụ mới</label>
+                        <input class="form-control" type="text" required>
+                    </div>
+                </div>
+                <BR>
+                <button class="btn btn-save" type="button">Lưu lại</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+  MODAL
+-->

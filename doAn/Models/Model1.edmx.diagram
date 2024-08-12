@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c5a084cf68b345c495aa2ecb053545c0" Name="Diagram1">
+        <EntityTypeShape EntityType="DuLieu2Model.BaiViet" Width="1.5" PointX="4.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.CtDonHang" Width="1.5" PointX="7.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.DonHang" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.KhachHang" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.LoaiSP" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.SanPham" Width="1.5" PointX="2.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLieu2Model.TaiKhoan" Width="1.5" PointX="0.5" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="DuLieu2Model.FK__BaiViet__taiKhoa__4E1E9780" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__CtDonHang__maSP__67DE6983" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__CtDonHang__soDH__66EA454A" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__DonHang__maKH__6225902D" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__DonHang__taiKhoa__6319B466" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__SanPham__maLoai__57A801BA" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLieu2Model.FK__SanPham__taiKhoa__59904A2C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
